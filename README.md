@@ -5,7 +5,9 @@
 - nodejs-platform
 
 ```yaml
-      - name: Read version
-        id: read_version
-        uses: Devecorsoft/workflows/.github/workflows/read-version-node.yml@v1
+jobs:
+  invoke:
+    uses: Devecorsoft/workflows/.github/workflows/read-version-node.yml@v1
+    with:
+      package_json: "./package.json"
 ```
