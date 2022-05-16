@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:verify": "npx esbuild verify-version.js --bundle --platform=node --target=node16 --outfile=../../publish/verify_version.js"
   },
   "devDependencies": {
     "esbuild": "^0.14.39"
