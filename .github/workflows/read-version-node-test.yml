@@ -9,8 +9,11 @@ on:
 jobs:
   prepare:
     runs-on: ubuntu-latest
+    outputs:
+      package_json: ${{ steps.put_package_json.outputs.package_json }}
     steps:
       - name: "Prepare package.json"
+        id: put_package_json
         run: |
           echo '{ "version": "0.0.1" }' > package.json
           echo '::set-output name=package_json::"$(cat package.json)"'
