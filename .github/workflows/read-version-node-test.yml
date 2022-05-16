@@ -8,7 +8,7 @@ on:
 
 jobs:
   invoke:
-    uses: Devecorsoft/workflows/.github/workflows/read-version-node.yml@v1
+    uses: Devecorsoft/workflows/.github/workflows/read-version-node.yml@main
     with:
       package_json: "./test/package.json"
   assert:
