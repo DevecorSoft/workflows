@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
     paths:
-      - ".github/workflows/verify-version.yml"
+      - "publish/workflows/verify-version.yml"
       - ".github/workflows/verify-version-test.yml"
 
 jobs:

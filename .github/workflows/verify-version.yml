@@ -30,5 +30,5 @@ jobs:
       - id: verify_step
         run: |
           mkdir -p .github/reusable/scripts
-          echo "$(curl -s https://raw.githubusercontent.com/DevecorSoft/workflows/main/.github/scripts/verify-version.js)" > .github/reusable/scripts/verify-version.js
+          echo "$(curl -s https://raw.githubusercontent.com/DevecorSoft/workflows/main/publish/scripts/verify-version.js)" > .github/reusable/scripts/verify-version.js
           echo "::set-output name=version::$(node .github/reusable/scripts/verify-version.js --platform=${{ inputs.platform }} --path=${{ inputs.path }} --destination=${{ inputs.destination }})"
