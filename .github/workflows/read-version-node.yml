@@ -1,6 +1,10 @@
 name: github packages
 on:
   workflow_call:
+    inputs:
+      package_json:
+        required: true
+        type: string
     outputs:
       version:
         description: "current version in package.json"
@@ -22,4 +26,4 @@ jobs:
 
       - name: Read current version
         id: read_current_version
-        run: echo "::set-output name=version::$(node .github/scripts/read-version-node.js package.json)"
+        run: echo '::set-output name=version::$(node .github/scripts/read-version-node.js ${{ inputs.package_json }})'

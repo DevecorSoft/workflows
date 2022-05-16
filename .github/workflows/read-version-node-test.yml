@@ -1,0 +1,27 @@
+name: "test version reading"
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/read-version-node.yml"
+      - ".github/workflows/read-version-node-test.yml"
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Prepare package.json"
+        run: |
+          echo '{ "version": "0.0.1" }' > package.json
+          echo '::set-output name=package_json::"$(cat package.json)"'
+  invoke:
+    needs: prepare
+    uses: Devecorsoft/workflows/.github/workflows/read-version-node.yml@v1
+    with:
+      package_json: ${{ needs.prepare.outputs.package_json }}
+  assert:
+    runs-on: ubuntu-latest
+    needs:
+      - invoke
+    steps:
+      - run: echo "${{ needs.invoke.outputs.version }}"
