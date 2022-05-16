@@ -27,6 +27,7 @@ jobs:
 
       - name: Read current version
         id: read_current_version
-        run: |
+        run:
+          mkdir -p .github/scripts
           echo "$(curl -s https://raw.githubusercontent.com/DevecorSoft/workflows/main/.github/scripts/read-version-node.js)" > .github/scripts/read-version-node.js
           echo "::set-output name=version::$(node .github/scripts/read-version-node.js ${{ inputs.package_json }})"
