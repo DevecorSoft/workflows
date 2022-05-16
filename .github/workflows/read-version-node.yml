@@ -28,7 +28,7 @@ jobs:
       - name: Read current version
         id: read_current_version
         run:
-          mkdir -p .github/scripts
-          echo "$(curl -s https://raw.githubusercontent.com/DevecorSoft/workflows/main/.github/scripts/read-version-node.js)" > .github/scripts/read-version-node.js
-          cat .github/scripts/read-version-node.js
-          echo "::set-output name=version::$(node .github/scripts/read-version-node.js ${{ inputs.package_json }})"
+          mkdir -p .github/reusable/scripts
+          echo "$(curl -s https://raw.githubusercontent.com/DevecorSoft/workflows/main/.github/scripts/read-version-node.js)" > .github/reusable/scripts/read-version-node.js
+          cat .github/reusable/scripts/read-version-node.js
+          echo "::set-output name=version::$(node .github/reusable/scripts/read-version-node.js ${{ inputs.package_json }})"
