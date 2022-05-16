@@ -18,5 +18,5 @@ jobs:
     steps:
       - if: ${{ needs.invoke.outputs.version != '1.0.0' }}
         run: |
-          echo "Failed!"
+          echo "Failed: expect ${{ needs.invoke.outputs.version }} to be '1.0.0'"
           exit 1
