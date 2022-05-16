@@ -30,5 +30,4 @@ jobs:
         run: |
           mkdir -p .github/reusable/scripts
           echo "$(curl -s https://raw.githubusercontent.com/DevecorSoft/workflows/main/.github/scripts/read-version-node.js)" > .github/reusable/scripts/read-version-node.js
-          cat .github/reusable/scripts/read-version-node.js
           echo "::set-output name=version::$(node .github/reusable/scripts/read-version-node.js ${{ inputs.package_json }})"
