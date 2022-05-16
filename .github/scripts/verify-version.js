@@ -5,9 +5,14 @@ const argv = require('minimist')(process.argv.slice(2));
 
 console.log(argv)
 
-const ver = read_version()
-const dst = get_target_version()
-verify(ver, dst)
+try {
+    const ver = read_version()
+    const dst = get_target_version()
+    verify(ver, dst)
+} catch (e) {
+    console.error(e)
+    process.exit(1)
+}
 
 
 function read_version_from_pure_text(path) {

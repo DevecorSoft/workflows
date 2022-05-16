@@ -213,9 +213,14 @@ var { readFileSync } = require("fs");
 var { execSync } = require("child_process");
 var argv = require_minimist()(process.argv.slice(2));
 console.log(argv);
-var ver = read_version();
-var dst = get_target_version();
-verify(ver, dst);
+try {
+  const ver = read_version();
+  const dst = get_target_version();
+  verify(ver, dst);
+} catch (e) {
+  console.error(e);
+  process.exit(1);
+}
 function read_version_from_pure_text(path) {
   return readFileSync(path, "utf8");
 }
@@ -238,11 +243,11 @@ function get_target_version() {
     throw Error(`destination: ${argv == null ? void 0 : argv.destination} is unknown`);
   }
 }
-function verify(src, dst2) {
-  if (src.length !== dst2.length) {
-    throw Error(`we can't compare ${src} with ${dst2}`);
+function verify(src, dst) {
+  if (src.length !== dst.length) {
+    throw Error(`we can't compare ${src} with ${dst}`);
   }
-  if (src <= dst2) {
+  if (src <= dst) {
     throw Error("please don't forget to bump version.");
   } else {
     console.log(src);
