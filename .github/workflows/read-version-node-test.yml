@@ -16,7 +16,7 @@ jobs:
         id: put_package_json
         run: |
           echo '{ "version": "0.0.1" }' > package.json
-          echo '::set-output name=package_json::"$(cat package.json)"'
+          echo "::set-output name=package_json::\"$(cat package.json)\""
   invoke:
     needs: prepare
     uses: Devecorsoft/workflows/.github/workflows/read-version-node.yml@v1
