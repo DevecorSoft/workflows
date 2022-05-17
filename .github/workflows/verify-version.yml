@@ -27,9 +27,16 @@ jobs:
     outputs:
       version: ${{ steps.verify_step.outputs.version }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
       - id: verify_step
         run: |
           mkdir -p .github/reusable/scripts
-          pwd
           echo "$(curl -s https://raw.githubusercontent.com/DevecorSoft/workflows/main/publish/verify_version.js)" > .github/reusable/scripts/verify-version.js
           echo "::set-output name=version::$(node .github/reusable/scripts/verify-version.js --platform=${{ inputs.platform }} --path=${{ inputs.path }} --destination=${{ inputs.destination }})"
