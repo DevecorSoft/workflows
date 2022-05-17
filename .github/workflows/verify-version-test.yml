@@ -3,8 +3,9 @@ on:
   push:
     branches: [main]
     paths:
-      - "publish/workflows/verify-version.yml"
+      - "publish/workflows/verify-version.js"
       - ".github/workflows/verify-version-test.yml"
+      - ".github/workflows/verify-version.yml"
 
 jobs:
   invoke:
