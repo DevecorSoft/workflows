@@ -1,4 +1,4 @@
-name: "test version verification"
+name: "test version reading"
 on:
   push:
     branches: [main]
