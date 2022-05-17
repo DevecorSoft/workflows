@@ -15,7 +15,7 @@ jobs:
 ```yaml
 jobs:
   invoke:
-    uses: Devecorsoft/workflows/.github/workflows/verify-version.yml@main
+    uses: Devecorsoft/workflows/.github/workflows/verify-version.yml@verify-v1
     with:
       current: "v1.0.6"
       destination: "git-tag" # or v1.0.0, 2.3.4 etc.
