@@ -1,0 +1,36 @@
+name: "read version"
+on:
+  workflow_call:
+    inputs:
+      platform:
+        description: "please select the platform you're using e.g. nodejs, pure-txt"
+        required: true
+        type: string
+      path:
+        required: true
+        type: string
+    outputs:
+      version:
+        description: "current version"
+        value: ${{ jobs.read_version.outputs.version }}
+
+jobs:
+  read_version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.read_current_version.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - id: read_current_version
+        run: |
+          mkdir -p .github/reusable/scripts
+          echo "$(curl -s https://raw.githubusercontent.com/DevecorSoft/workflows/main/publish/read_version.js)" > .github/reusable/scripts/read-version.js
+          node .github/reusable/scripts/read-version.js --platform=${{ inputs.platform }} --path=${{ inputs.path }}
+          echo "::set-output name=version::$(node .github/reusable/scripts/read-version.js --platform=${{ inputs.platform }} --path=${{ inputs.path }})"

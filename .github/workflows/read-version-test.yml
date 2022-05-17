@@ -1,0 +1,15 @@
+name: "test version verification"
+on:
+  push:
+    branches: [main]
+    paths:
+      - "publish/workflows/read_version.js"
+      - ".github/workflows/read-version-test.yml"
+      - ".github/workflows/read-version.yml"
+
+jobs:
+  invoke:
+    uses: Devecorsoft/workflows/.github/workflows/verify-version.yml@main
+    with:
+      platform: "nodejs"
+      path: "./test/package.json"

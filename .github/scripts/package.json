@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "build:verify": "npx esbuild verify-version.js --bundle --platform=node --target=node16 --outfile=../../publish/verify_version.js"
+    "build:verify": "npx esbuild verify-version.js --bundle --platform=node --target=node16 --outfile=../../publish/verify_version.js",
+    "build:reader": "npx esbuild read-version.js --bundle --platform=node --target=node16 --outfile=../../publish/read_version.js"
   },
   "devDependencies": {
     "esbuild": "^0.14.39"
