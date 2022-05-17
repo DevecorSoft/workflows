@@ -9,7 +9,7 @@ on:
 
 jobs:
   invoke:
-    uses: Devecorsoft/workflows/.github/workflows/verify-version.yml@main
+    uses: Devecorsoft/workflows/.github/workflows/read-version.yml@main
     with:
       platform: "nodejs"
       path: "./test/package.json"
