@@ -2,30 +2,18 @@ name: "verify version bumped"
 on:
   workflow_call:
     inputs:
-      platform:
+      current:
         required: true
         type: string
-        default: "pure-txt"
-      path:
-        type: string
-        required: false
-        default: "./version.txt"
       destination:
         required: false
         type: string
         default: "git-tag"
-
-    outputs:
-      version:
-        description: "current version in package.json"
-        value: ${{ jobs.verify.outputs.version }}
         
 
 jobs: 
   verify:
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.verify_step.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -39,4 +27,4 @@ jobs:
         run: |
           mkdir -p .github/reusable/scripts
           echo "$(curl -s https://raw.githubusercontent.com/DevecorSoft/workflows/main/publish/verify_version.js)" > .github/reusable/scripts/verify-version.js
-          echo "::set-output name=version::$(node .github/reusable/scripts/verify-version.js --platform=${{ inputs.platform }} --path=${{ inputs.path }} --destination=${{ inputs.destination }})"
+          node .github/reusable/scripts/verify-version.js --current=${{ inputs.current }} --destination=${{ inputs.destination }}

@@ -11,5 +11,4 @@ jobs:
   invoke:
     uses: Devecorsoft/workflows/.github/workflows/verify-version.yml@main
     with:
-      platform: "nodejs"
-      path: "./test/package.json"
+      current: "1.0.0"

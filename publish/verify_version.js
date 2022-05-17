@@ -209,33 +209,10 @@ var require_minimist = __commonJS({
 });
 
 // verify-version.js
-var { readFileSync } = require("fs");
 var { execSync } = require("child_process");
 var argv = require_minimist()(process.argv.slice(2));
-console.log(argv);
-try {
-  const ver = read_version();
-  const dst = get_target_version();
-  verify(ver, dst);
-} catch (e) {
-  console.error(e);
-  process.exit(1);
-}
-function read_version_from_pure_text(path) {
-  return readFileSync(path, "utf8");
-}
-function read_version_from_package_json(path) {
-  return JSON.parse(readFileSync(path, "utf8")).version;
-}
-function read_version() {
-  if ((argv == null ? void 0 : argv.platform) === "pure-txt") {
-    return read_version_from_pure_text(argv == null ? void 0 : argv.path);
-  } else if ((argv == null ? void 0 : argv.platform) === "nodejs") {
-    return read_version_from_package_json(argv == null ? void 0 : argv.path);
-  } else {
-    throw Error(`platform: ${argv == null ? void 0 : argv.platform} is unknown`);
-  }
-}
+var dst = get_target_version();
+verify(argv == null ? void 0 : argv.current, dst);
 function get_target_version() {
   if ((argv == null ? void 0 : argv.destination) === "git-tag") {
     return String.fromCharCode(...execSync("git tag -l")).trim().split("\n").at(-1);
@@ -243,11 +220,11 @@ function get_target_version() {
     throw Error(`destination: ${argv == null ? void 0 : argv.destination} is unknown`);
   }
 }
-function verify(src, dst) {
-  if (src.length !== dst.length) {
-    throw Error(`we can't compare ${src} with ${dst}`);
+function verify(src, dst2) {
+  if (src.length !== dst2.length) {
+    throw Error(`we can't compare ${src} with ${dst2}`);
   }
-  if (src <= dst) {
+  if (src <= dst2) {
     throw Error("please don't forget to bump version.");
   } else {
     console.log(src);
