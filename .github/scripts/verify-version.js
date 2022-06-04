@@ -14,13 +14,13 @@ function get_target_version () {
   }
 }
 
-function verify (src, dst) {
-  if (src.length !== dst.length) {
-    throw Error(`we can't compare ${src} with ${dst}`)
+function verify(src, dst) {
+  if (src.split(".").length !== dst.split(".").length) {
+    throw Error(`we can't compare ${src} with ${dst}`);
   }
-  if (src <= dst) {
-    throw Error('please don\'t forget to bump version.')
+  if (parseInt(src.replaceAll(".", "")) <= parseInt(dst.replaceAll(".", ""))) {
+    throw Error("please don't forget to bump version.");
   } else {
-    console.log(src)
+    console.log(src);
   }
 }

@@ -221,10 +221,10 @@ function get_target_version() {
   }
 }
 function verify(src, dst2) {
-  if (src.length !== dst2.length) {
+  if (src.split(".").length !== dst2.split(".").length) {
     throw Error(`we can't compare ${src} with ${dst2}`);
   }
-  if (src <= dst2) {
+  if (parseInt(src.replaceAll(".", "")) <= parseInt(dst2.replaceAll(".", ""))) {
     throw Error("please don't forget to bump version.");
   } else {
     console.log(src);
